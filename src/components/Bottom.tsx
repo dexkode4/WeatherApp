@@ -1,6 +1,7 @@
 import React from "react";
 import { Box, BoxProps } from "@chakra-ui/react";
 import { motion } from "framer-motion";
+import { WeatherCardContainer } from "./WeatherCardContainer";
 
 const variants = {
   hidden: {
@@ -27,7 +28,7 @@ export const Bottom = () => {
       padding="4"
       pt="7"
     >
-      Bottom
+      <WeatherCardContainer />
     </MotionBox>
   );
 };
