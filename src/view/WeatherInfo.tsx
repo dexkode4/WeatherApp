@@ -32,7 +32,6 @@ export const WeatherInfo = () => {
           lon: position.coords.longitude,
         });
       });
-
     } else {
       toast({
         title: "Location service",
@@ -43,6 +42,11 @@ export const WeatherInfo = () => {
       });
     }
   }, [toast]);
+
+
+  useEffect(() => {
+    localStorage.setItem("temperature_unit", tempUnit);
+  }, [tempUnit]);
 
   useEffect(() => {
     const errorObj = error as { message: string };
@@ -83,7 +87,7 @@ export const WeatherInfo = () => {
             </Stack>
           </RadioGroup>
           <Top data={data?.city} />
-          <Bottom reload={() => refetch()} />
+          <Bottom data={data?.list} reload={() => refetch()} />
         </>
       )}
     </Flex>

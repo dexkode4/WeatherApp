@@ -2,6 +2,8 @@ import React from "react";
 import { Box, IconButton, Icon } from "@chakra-ui/react";
 import Carousel, { RenderArrowProps } from "react-elastic-carousel";
 import { IoChevronBackSharp, IoChevronForwardSharp } from "react-icons/io5";
+import { IWeatherInfoSection } from "../types/interface";
+import { WeatherCard } from "./WeatherCard";
 
 const breakPoints = [
   { width: 1, itemsToShow: 1 },
@@ -9,7 +11,12 @@ const breakPoints = [
   { width: 768, itemsToShow: 3 },
 ];
 
-export const WeatherCardContainer = () => {
+interface IWeatherCardContainerProps {
+  data: Array<IWeatherInfoSection>;
+}
+
+export const WeatherCardContainer = ({ data }: IWeatherCardContainerProps) => {
+
   const renderArrow = (props: RenderArrowProps) => {
     return props.type === "PREV" ? (
       <IconButton
@@ -19,6 +26,7 @@ export const WeatherCardContainer = () => {
         disabled={props.isEdge}
         borderRadius="full"
         size="sm"
+        alignSelf="center"
       />
     ) : (
       <IconButton
@@ -28,6 +36,7 @@ export const WeatherCardContainer = () => {
         disabled={props.isEdge}
         borderRadius="full"
         size="sm"
+        alignSelf="center"
       />
     );
   };
@@ -40,10 +49,11 @@ export const WeatherCardContainer = () => {
         isRTL={false}
         breakPoints={breakPoints}
       >
-        <Box>1</Box>
-        <Box>2</Box>
-        <Box>3</Box>
-        <Box>4</Box>
+       {
+         data.map((item, index) => (
+           <WeatherCard data={item} key={index}/>
+         ))
+       }
       </Carousel>
     </Box>
   );

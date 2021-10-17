@@ -1,5 +1,5 @@
 
-export interface IWeatherItem {
+export interface IWeatherSegment {
   dt: number;
   main: {
     temp: number;
@@ -10,14 +10,14 @@ export interface IWeatherItem {
     sea_level: number;
     grnd_level: number;
     humidity: number;
-    temp_kf: 0;
+    temp_kf: number;
   };
   weather: [
     {
       id: number;
-      main: "Rain";
-      description: "light rain";
-      icon: "10d";
+      main: string;
+      description: string;
+      icon: string;
     }
   ];
   clouds: {
@@ -60,8 +60,12 @@ export interface ICity {
   sunset: number;
 }
 
-
 export interface IWeatherInfo {
   city: ICity;
-  list: Array<IWeatherItem>
+  list: Array<IWeatherSegment>
+}
+
+export interface IWeatherInfoSection{
+  title: string,
+  data: IWeatherSegment[]
 }
