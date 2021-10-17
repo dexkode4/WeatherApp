@@ -1,4 +1,13 @@
-import { Flex, Heading, Image, Box, Text, Grid } from "@chakra-ui/react";
+import {
+  Flex,
+  Heading,
+  Image,
+  Box,
+  Text,
+  Grid,
+  Tag,
+  TagLabel,
+} from "@chakra-ui/react";
 import React, { useEffect } from "react";
 import { IWeatherInfoSection } from "../types/interface";
 import { Temp } from "../types/TempEnums";
@@ -6,37 +15,59 @@ import { constructUrl } from "../utils";
 
 interface IWeatherCardProps {
   data: IWeatherInfoSection;
+  handleSelect: () => void;
 }
 
 const iconUrl = "http://openweathermap.org/img/wn/:icon@4x.png";
 
-export const WeatherCard = ({ data }: IWeatherCardProps) => {
-
+export const WeatherCard = ({ data, handleSelect }: IWeatherCardProps) => {
   return (
     <>
-      <Grid
+      <Flex
         borderWidth="1px"
         height="30vh"
-        w={["90%","80%"]}
+        w={["90%", "80%"]}
         borderRadius="md"
         p="2"
-        // flexDirection="column"
         my="5"
         shadow="sm"
-        templateColumns="1fr"
-        justifyItems="center"
+        onClick={handleSelect}
+        // templateColumns="1fr"
+        // justifyItems="center"
+        flexDirection="column"
+        justifyContent="space-between"
+        alignItems="center"
+        cursor="pointer"
       >
         <Heading fontSize="sm">{data.title}</Heading>
-          <Image
-            src={constructUrl(iconUrl, { icon: data.data[0].weather[0].icon })}
-            boxSize="100px"
-          />
-          <Text alignSelf="flex-end">
+        <Tag
+          variant="subtle"
+          colorScheme="linkedin"
+          borderRadius="full"
+          size="sm"
+          py="0"
+        >
+          {" "}
+          {/* <TagLabel>
+            {data.data[0].weather[0].description}
+          </TagLabel> */}
+          {data.data[0].weather[0].description}
+        </Tag>
+        <Image
+          src={constructUrl(iconUrl, { icon: data.data[0].weather[0].icon })}
+          boxSize="100px"
+        />
+        <Flex>
+          <Text>
             {data.data[0].main.temp}
             <sup>o</sup>
-            {localStorage.getItem('temperature_unit') === Temp.Celsius ? "C" : "F"}
+            {localStorage.getItem("temperature_unit") &&
+            localStorage.getItem("temperature_unit") === Temp.Celsius
+              ? "C"
+              : "F"}
           </Text>
-      </Grid>
+        </Flex>
+      </Flex>
     </>
   );
 };

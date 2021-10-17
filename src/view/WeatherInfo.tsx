@@ -23,6 +23,12 @@ export const WeatherInfo = () => {
   const { data, isLoading, isFetching, isError, error, refetch } =
     useWeatherInfo(coord, tempUnit);
 
+  useEffect(() => {
+    const temperature_unit = localStorage.getItem("temperature_unit");
+    if (temperature_unit) {
+      setTempUnit(temperature_unit);
+    }
+  }, []);
 
   useEffect(() => {
     if ("geolocation" in navigator) {
@@ -42,7 +48,6 @@ export const WeatherInfo = () => {
       });
     }
   }, [toast]);
-
 
   useEffect(() => {
     localStorage.setItem("temperature_unit", tempUnit);
@@ -64,7 +69,7 @@ export const WeatherInfo = () => {
 
   return (
     <Flex direction="column" background="#2052D1" h="100vh">
-      {isLoading ? (
+      {isLoading && coord !== undefined ? (
         <AppLoader />
       ) : (
         <>

@@ -53,12 +53,13 @@ export const Bottom = ({ reload, data }: IBottomProps) => {
       variants={variants}
       initial="hidden"
       animate="visible"
-      flex="1"
+      height="80vh"
       bg="white"
       borderTopRadius="3xl"
       padding="4"
       pt="7"
       pos="relative"
+      overflowY="scroll"
     >
       <IconButton
         onClick={reload}
