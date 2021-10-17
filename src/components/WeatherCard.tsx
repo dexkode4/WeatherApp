@@ -18,6 +18,14 @@ interface IWeatherCardProps {
 const iconUrl = "http://openweathermap.org/img/wn/:icon@4x.png";
 
 export const WeatherCard = ({ data, handleSelect }: IWeatherCardProps) => {
+
+  const calculateAverageTemp = (): number => {
+      const sum = data.data.reduce((acc, curr) => acc + curr.main.temp  ,0);
+      console.log('====================================');
+      console.log("sum", sum);
+      console.log('====================================');
+      return Math.round(sum / data.data.length)
+  }
   return (
     <>
       <Flex
@@ -64,7 +72,7 @@ export const WeatherCard = ({ data, handleSelect }: IWeatherCardProps) => {
         />
         <Flex>
           <Text color="white">
-            {data.data[0].main.temp}
+            {calculateAverageTemp()}
             <sup>o</sup>
             {localStorage.getItem("temperature_unit") &&
             localStorage.getItem("temperature_unit") === Temp.Celsius
