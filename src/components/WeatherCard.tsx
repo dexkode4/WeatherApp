@@ -21,9 +21,6 @@ export const WeatherCard = ({ data, handleSelect }: IWeatherCardProps) => {
 
   const calculateAverageTemp = (): number => {
       const sum = data.data.reduce((acc, curr) => acc + curr.main.temp  ,0);
-      console.log('====================================');
-      console.log("sum", sum);
-      console.log('====================================');
       return Math.round(sum / data.data.length)
   }
   return (

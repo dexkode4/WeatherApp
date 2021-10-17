@@ -44,10 +44,6 @@ export const WeatherCardContainer = ({ data }: IWeatherCardContainerProps) => {
     );
 
     setWeatherSegmentData(weatherSegmentData);
-
-    console.log("====================================");
-    console.log("weatherSegmentData", weatherSegmentData);
-    console.log("====================================");
   };
 
   const renderArrow = (props: RenderArrowProps) => {
