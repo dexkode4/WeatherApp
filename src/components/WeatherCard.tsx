@@ -35,14 +35,20 @@ export const WeatherCard = ({ data, handleSelect }: IWeatherCardProps) => {
         justifyContent="space-between"
         alignItems="center"
         cursor="pointer"
+        _hover={{
+          shadow: "lg"
+        }}
       >
         <Heading fontSize="sm">{data.title}</Heading>
         <Tag
           variant="subtle"
-          colorScheme="linkedin"
+          colorScheme="blackAlpha"
           borderRadius="full"
           size="sm"
           py="0"
+          mt="1"
+          fontSize="sm"
+          textTransform="capitalize"
         >
           {" "}
           {/* <TagLabel>

@@ -106,11 +106,11 @@ export const WeatherCardContainer = ({ data }: IWeatherCardContainerProps) => {
               }}
             >
               <CartesianGrid strokeDasharray="3 3" />
-              <XAxis dataKey="time" />
-              <YAxis />
+              <XAxis dataKey="time" stroke="#fff"/>
+              <YAxis stroke="#fff" />
               <Tooltip />
               <Legend />
-              <Bar dataKey="temp" fill="#8884d8" />
+              <Bar dataKey="temp" fill="#82ca9d" />
             </BarChart>
           </ResponsiveContainer>
         )}
