@@ -34,7 +34,7 @@ interface IWeatherCardContainerProps {
 export const WeatherCardContainer = ({ data }: IWeatherCardContainerProps) => {
   const [weatherSegmentData, setWeatherSegmentData] =
     useState<Array<IBarchartData>>();
-  const [selectedCard, setSelectedCard] = useState<number>();
+  const [selectedCard, setSelectedCard] = useState<number>(0);
 
   const handleSelectWeatherCard = (index: number) => {
     setSelectedCard(index)

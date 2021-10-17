@@ -64,7 +64,7 @@ export const Bottom = ({ reload, data }: IBottomProps) => {
         left="0"
         variant="ghost"
         aria-label="refresh"
-        icon={<Icon as={VscRefresh} />}
+        icon={<Icon as={VscRefresh} w="6" h="6" />}
         size="lg"
         borderRadius="full"
       />
