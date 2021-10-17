@@ -1,26 +1,38 @@
-import { Flex, useToast } from "@chakra-ui/react";
+import {
+  Flex,
+  useToast,
+  Switch,
+  Box,
+  Radio,
+  RadioGroup,
+  Stack,
+  Text,
+} from "@chakra-ui/react";
 import React, { useEffect, useState } from "react";
-// import { AppLoader } from "../components/AppLoader";
+import { AppLoader } from "../components/AppLoader";
 import { Bottom } from "../components/Bottom";
 import { Top } from "../components/Top";
-
-export interface ICoord {
-  lat: number;
-  lng: number;
-}
+import { useWeatherInfo } from "../hooks/useWeatherInfo";
+import { ICoord } from "../types/interface";
+import { Temp } from "../types/TempEnums";
 
 export const WeatherInfo = () => {
   const toast = useToast();
   const [coord, setCoord] = useState<ICoord>();
+  const [tempUnit, setTempUnit] = useState<string>(Temp.Celsius);
+  const { data, isLoading, isFetching, isError, error, refetch } =
+    useWeatherInfo(coord, tempUnit);
+
 
   useEffect(() => {
     if ("geolocation" in navigator) {
       navigator.geolocation.getCurrentPosition(function (position) {
         setCoord({
           lat: position.coords.latitude,
-          lng: position.coords.longitude,
+          lon: position.coords.longitude,
         });
       });
+
     } else {
       toast({
         title: "Location service",
@@ -32,14 +44,48 @@ export const WeatherInfo = () => {
     }
   }, [toast]);
 
-  console.log('====================================');
-  console.log(coord);
-  console.log('====================================');
+  useEffect(() => {
+    const errorObj = error as { message: string };
+    if (isError) {
+      toast({
+        title: "Network error",
+        description: errorObj?.message,
+        status: "error",
+        duration: 9000,
+        isClosable: true,
+        position: "top",
+      });
+    }
+  }, [isError, error]);
+
   return (
     <Flex direction="column" background="#2052D1" h="100vh">
-      {/* <AppLoader /> */}
-      <Top />
-      <Bottom />
+      {isLoading ? (
+        <AppLoader />
+      ) : (
+        <>
+          {isFetching && <AppLoader />}
+          <RadioGroup onChange={setTempUnit} value={tempUnit} m="4" mb="0">
+            <Stack
+              direction="row"
+              justifyContent={["space-between", "flex-start"]}
+            >
+              <Radio colorScheme="green" value={Temp.Celsius}>
+                <Text color="white" fontSize="sm">
+                  Celsius
+                </Text>
+              </Radio>
+              <Radio colorScheme="green" value={Temp.Fahrenheit}>
+                <Text color="white" fontSize="sm">
+                  Fahrenheit
+                </Text>
+              </Radio>
+            </Stack>
+          </RadioGroup>
+          <Top data={data?.city} />
+          <Bottom reload={() => refetch()} />
+        </>
+      )}
     </Flex>
   );
 };
