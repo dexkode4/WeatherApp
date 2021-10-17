@@ -22,6 +22,7 @@ export const WeatherCard = ({ data, handleSelect }: IWeatherCardProps) => {
     <>
       <Flex
         borderWidth="1px"
+        borderColor="gray.400"
         height="30vh"
         w={["90%", "80%"]}
         borderRadius="md"
@@ -39,7 +40,7 @@ export const WeatherCard = ({ data, handleSelect }: IWeatherCardProps) => {
           shadow: "lg"
         }}
       >
-        <Heading fontSize="sm">{data.title}</Heading>
+        <Heading fontSize="sm" color="white">{data.title}</Heading>
         <Tag
           variant="subtle"
           colorScheme="blackAlpha"
@@ -49,6 +50,7 @@ export const WeatherCard = ({ data, handleSelect }: IWeatherCardProps) => {
           mt="1"
           fontSize="sm"
           textTransform="capitalize"
+          color="white"
         >
           {" "}
           {/* <TagLabel>
@@ -61,7 +63,7 @@ export const WeatherCard = ({ data, handleSelect }: IWeatherCardProps) => {
           boxSize="100px"
         />
         <Flex>
-          <Text>
+          <Text color="white">
             {data.data[0].main.temp}
             <sup>o</sup>
             {localStorage.getItem("temperature_unit") &&
