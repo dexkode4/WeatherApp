@@ -1,5 +1,5 @@
 import axios from "axios";
-import { ICoord, IJsonResponse, IWeatherInfo } from "./types/interface";
+import { ICoord, IWeatherInfo } from "./types/interface";
 
 const routes = {
   weatherInfo:

@@ -1,8 +1,6 @@
 import {
   Flex,
   useToast,
-  Switch,
-  Box,
   Radio,
   RadioGroup,
   Stack,
@@ -65,7 +63,7 @@ export const WeatherInfo = () => {
         position: "top",
       });
     }
-  }, [isError, error]);
+  }, [isError, error, toast]);
 
   return (
     <Flex direction="column" background="#2052D1" h="100vh">

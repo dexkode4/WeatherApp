@@ -4,7 +4,7 @@ import { motion } from "framer-motion";
 import { WeatherCardContainer } from "./WeatherCardContainer";
 import { VscRefresh } from "react-icons/vsc";
 import { IWeatherInfoSection, IWeatherSegment } from "../types/interface";
-import { constructUrl, monthName } from "../utils";
+import { monthName } from "../utils";
 import groupBy from "lodash.groupby";
 
 const variants = {
@@ -25,15 +25,11 @@ interface IBottomProps {
   reload: () => void;
   data?: Array<IWeatherSegment>;
 }
-
-const iconUrl = "http://openweathermap.org/img/wn/:icon@4x.png";
-
 export const Bottom = ({ reload, data }: IBottomProps) => {
   const [sections, setSections] = useState<IWeatherInfoSection[]>([]);
 
   useEffect(() => {
     if (data) {
-      const url = constructUrl(iconUrl, { icon: data[0]?.weather[0]?.icon });
       const result = groupBy(data, monthName);
 
       const days: IWeatherInfoSection[] = [];
@@ -45,8 +41,6 @@ export const Bottom = ({ reload, data }: IBottomProps) => {
       setSections(days);
     }
   }, [data]);
-
-  console.log(sections);
 
   return (
     <MotionBox

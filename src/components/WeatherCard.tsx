@@ -2,13 +2,10 @@ import {
   Flex,
   Heading,
   Image,
-  Box,
   Text,
-  Grid,
   Tag,
-  TagLabel,
 } from "@chakra-ui/react";
-import React, { useEffect } from "react";
+import React from "react";
 import { IWeatherInfoSection } from "../types/interface";
 import { Temp } from "../types/TempEnums";
 import { constructUrl } from "../utils";
