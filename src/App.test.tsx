@@ -1,5 +1,5 @@
 import { getWeatherInfo } from "./api";
-import { render, fireEvent, screen } from "@testing-library/react";
+import { render } from "@testing-library/react";
 import { ICity, IWeatherInfo, IWeatherInfoSection } from "./types/interface";
 import { WeatherCard } from "./components/WeatherCard";
 import { setupServer } from "msw/node";
@@ -8,7 +8,6 @@ import groupBy from "lodash.groupby";
 import { monthName } from "./utils";
 import React from "react";
 import { Top } from "./components/Top";
-import { Barchart } from "./components/Barchart";
 
 let data: IWeatherInfo = {
   city: {

@@ -101,11 +101,11 @@ export const WeatherCardContainer = ({ data }: IWeatherCardContainerProps) => {
         ))}
       </Carousel>
 
-      {/* {weatherSegmentData && (
+      {weatherSegmentData && (
         <Flex mt="14" justifyContent="center" h="400px" w={["100%", "500px"]}>
           <Barchart data={weatherSegmentData} />
         </Flex>
-      )} */}
+      )}
     </Flex>
   );
 };
