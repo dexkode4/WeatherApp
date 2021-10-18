@@ -97,7 +97,7 @@ it("Renders weather description correctly", async () => {
     days.push(section);
   }
 
-  const { container, getByText } = render(
+  const { getByText } = render(
     <WeatherCard handleSelect={() => {}} active={true} data={days[0]} />
   );
 
