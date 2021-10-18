@@ -1,23 +1,12 @@
-import React from "react"
-import { queryByAttribute, screen } from "@testing-library/react"
-import { render } from "./test-utils"
-import { App } from "./App"
-import fetchMock from 'fetch-mock';
+import { getWeatherInfo } from "./api";
 
-const getById = queryByAttribute.bind(null, "id");
 
-const mockUrlApi = () => {
-  let urlDeferred;
-  const urlPromise = new Promise((resolve, reject) => {
-    urlDeferred = { reject, resolve };
-  });
-
-  fetchMock.getOnce("https://api.example.com/items", urlPromise, { overwriteRoutes: false });
-  return urlDeferred;
-};
-
-test("renders learn react link", () => {
-  render(<App />)
-  // const linkElement = screen.getByText(/Abuja/i)
-  // expect(linkElement).toBeInTheDocument()
-})
+it("Expect City", async () => {
+  const response = await getWeatherInfo(
+    { lat: 9.0764785, lon: 7.398574 },
+    "metric"
+  );
+  const isCityExist = response.city ? true : false;
+  console.log(response.city);
+  expect(isCityExist).toBe(true);
+});

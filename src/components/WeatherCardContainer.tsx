@@ -109,7 +109,7 @@ export const WeatherCardContainer = ({ data }: IWeatherCardContainerProps) => {
         {data.map((item, index) => (
           <WeatherCard
             data={item}
-            key={index}
+            key={JSON.stringify(item.data[0].main)}
             handleSelect={() => handleSelectWeatherCard(index)}
             active={selectedCard === index}
           />
