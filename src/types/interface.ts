@@ -21,20 +21,20 @@ export interface IWeatherSegment {
     }
   ];
   clouds: {
-    all: 45;
+    all: number;
   };
   wind: {
-    speed: 3.22;
-    deg: 221;
-    gust: 2.99;
+    speed: number;
+    deg: number;
+    gust: number;
   };
   visibility: number;
-  pop: 0.48;
+  pop: number;
   rain: {
-    "3h": 0.62;
+    "3h": number;
   };
   sys: {
-    pod: "d";
+    pod: string;
   };
   dt_txt: string;
 }
