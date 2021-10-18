@@ -1,5 +1,5 @@
 import { getWeatherInfo } from "./api";
-import { render } from "@testing-library/react";
+import { render, fireEvent, screen } from "@testing-library/react";
 import { ICity, IWeatherInfo, IWeatherInfoSection } from "./types/interface";
 import { WeatherCard } from "./components/WeatherCard";
 import { setupServer } from "msw/node";
@@ -7,6 +7,8 @@ import { rest } from "msw";
 import groupBy from "lodash.groupby";
 import { monthName } from "./utils";
 import React from "react";
+import { Top } from "./components/Top";
+import { Barchart } from "./components/Barchart";
 
 let data: IWeatherInfo = {
   city: {
@@ -87,6 +89,11 @@ it("Expects City", async () => {
   expect(isCityExist).toBe(true);
 });
 
+it("Renders city name", async () => {
+  const { getByText } = render(<Top data={data.city} />);
+
+  expect(getByText("Abuja")).toBeInTheDocument();
+});
 
 it("Renders weather description correctly", async () => {
   const result = groupBy(data.list, monthName);

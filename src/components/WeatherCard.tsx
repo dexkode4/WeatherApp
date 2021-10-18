@@ -22,62 +22,61 @@ export const WeatherCard = ({
     return Math.round(sum / data.data.length);
   };
   return (
-    <>
-      <Flex
-        borderWidth="1px"
-        borderColor="gray.400"
-        height="30vh"
-        w={["90%", "80%"]}
-        borderRadius="md"
-        p="2"
-        my="5"
-        shadow={active ? "lg" : "sm"}
-        onClick={handleSelect}
-        // templateColumns="1fr"
-        // justifyItems="center"
-        flexDirection="column"
-        justifyContent="space-between"
-        alignItems="center"
-        cursor="pointer"
-        _hover={{
-          shadow: "lg",
-        }}
+    <Flex
+      borderWidth="1px"
+      borderColor="gray.400"
+      height="30vh"
+      w={["90%", "80%"]}
+      borderRadius="md"
+      p="2"
+      my="5"
+      shadow={active ? "lg" : "sm"}
+      onClick={handleSelect}
+      // templateColumns="1fr"
+      // justifyItems="center"
+      flexDirection="column"
+      justifyContent="space-between"
+      alignItems="center"
+      cursor="pointer"
+      _hover={{
+        shadow: "lg",
+      }}
+      data-testid="weather-card"
+    >
+      <Heading fontSize="sm" color="white">
+        {data.title}
+      </Heading>
+      <Tag
+        variant="subtle"
+        colorScheme="blackAlpha"
+        borderRadius="full"
+        size="sm"
+        py="0"
+        mt="1"
+        fontSize="sm"
+        textTransform="capitalize"
+        color="white"
       >
-        <Heading fontSize="sm" color="white">
-          {data.title}
-        </Heading>
-        <Tag
-          variant="subtle"
-          colorScheme="blackAlpha"
-          borderRadius="full"
-          size="sm"
-          py="0"
-          mt="1"
-          fontSize="sm"
-          textTransform="capitalize"
-          color="white"
-        >
-          {" "}
-          {/* <TagLabel>
+        {" "}
+        {/* <TagLabel>
             {data.data[0].weather[0].description}
           </TagLabel> */}
-          {data.data[0].weather[0].description}
-        </Tag>
-        <Image
-          src={constructUrl(iconUrl, { icon: data.data[0].weather[0].icon })}
-          boxSize="100px"
-        />
-        <Flex>
-          <Text color="white">
-            {calculateAverageTemp()}
-            <sup>o</sup>
-            {localStorage.getItem("temperature_unit") &&
-            localStorage.getItem("temperature_unit") === Temp.Celsius
-              ? "C"
-              : "F"}
-          </Text>
-        </Flex>
+        {data.data[0].weather[0].description}
+      </Tag>
+      <Image
+        src={constructUrl(iconUrl, { icon: data.data[0].weather[0].icon })}
+        boxSize="100px"
+      />
+      <Flex>
+        <Text color="white">
+          {calculateAverageTemp()}
+          <sup>o</sup>
+          {localStorage.getItem("temperature_unit") &&
+          localStorage.getItem("temperature_unit") === Temp.Celsius
+            ? "C"
+            : "F"}
+        </Text>
       </Flex>
-    </>
+    </Flex>
   );
 };

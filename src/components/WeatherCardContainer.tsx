@@ -4,17 +4,8 @@ import Carousel, { RenderArrowProps } from "react-elastic-carousel";
 import { IoChevronBackSharp, IoChevronForwardSharp } from "react-icons/io5";
 import { IWeatherInfoSection } from "../types/interface";
 import { WeatherCard } from "./WeatherCard";
-import {
-  BarChart,
-  Bar,
-  XAxis,
-  YAxis,
-  CartesianGrid,
-  Tooltip,
-  Legend,
-  ResponsiveContainer,
-} from "recharts";
 import dayjs from "dayjs";
+import { Barchart } from "./Barchart";
 
 const breakPoints = [
   { width: 1, itemsToShow: 1 },
@@ -36,12 +27,6 @@ export const WeatherCardContainer = ({ data }: IWeatherCardContainerProps) => {
     useState<Array<IBarchartData>>();
   const [selectedCard, setSelectedCard] = useState<number>();
   const [isMobile] = useMediaQuery("(max-width: 665px)");
-
-  useEffect(() => {
-    console.log("====================================");
-    console.log(isMobile);
-    console.log("====================================");
-  }, [isMobile]);
 
   const handleSelectWeatherCard = (index: number) => {
     setSelectedCard(index);
@@ -116,30 +101,11 @@ export const WeatherCardContainer = ({ data }: IWeatherCardContainerProps) => {
         ))}
       </Carousel>
 
-      <Flex mt="14" justifyContent="center" h="400px" w={["100%", "500px"]}>
-        {weatherSegmentData && (
-          <ResponsiveContainer width="100%" height="100%">
-            <BarChart
-              width={500}
-              height={300}
-              data={weatherSegmentData}
-              margin={{
-                top: 5,
-                right: 30,
-                left: 20,
-                bottom: 5,
-              }}
-            >
-              <CartesianGrid strokeDasharray="3 3" />
-              <XAxis dataKey="time" stroke="#fff" />
-              <YAxis stroke="#fff" />
-              <Tooltip />
-              <Legend />
-              <Bar dataKey="temp" fill="#82ca9d" />
-            </BarChart>
-          </ResponsiveContainer>
-        )}
-      </Flex>
+      {/* {weatherSegmentData && (
+        <Flex mt="14" justifyContent="center" h="400px" w={["100%", "500px"]}>
+          <Barchart data={weatherSegmentData} />
+        </Flex>
+      )} */}
     </Flex>
   );
 };
