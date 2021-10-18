@@ -4,17 +4,12 @@ import ReactDOM from "react-dom";
 import { App } from "./App";
 import reportWebVitals from "./reportWebVitals";
 import * as serviceWorker from "./serviceWorker";
-import { QueryClient, QueryClientProvider } from "react-query";
 import "@fontsource/montserrat";
-
-const queryClient = new QueryClient();
 
 ReactDOM.render(
   <React.StrictMode>
     <ColorModeScript />
-    <QueryClientProvider client={queryClient}>
       <App />
-    </QueryClientProvider>
   </React.StrictMode>,
   document.getElementById("root")
 );

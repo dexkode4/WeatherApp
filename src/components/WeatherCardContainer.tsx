@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { IconButton, Icon, Flex } from "@chakra-ui/react";
+import { IconButton, Icon, Flex, useMediaQuery } from "@chakra-ui/react";
 import Carousel, { RenderArrowProps } from "react-elastic-carousel";
 import { IoChevronBackSharp, IoChevronForwardSharp } from "react-icons/io5";
 import { IWeatherInfoSection } from "../types/interface";
@@ -34,10 +34,17 @@ interface IWeatherCardContainerProps {
 export const WeatherCardContainer = ({ data }: IWeatherCardContainerProps) => {
   const [weatherSegmentData, setWeatherSegmentData] =
     useState<Array<IBarchartData>>();
-  const [selectedCard, setSelectedCard] = useState<number>(0);
+  const [selectedCard, setSelectedCard] = useState<number>();
+  const [isMobile] = useMediaQuery("(max-width: 665px)");
+
+  useEffect(() => {
+    console.log("====================================");
+    console.log(isMobile);
+    console.log("====================================");
+  }, [isMobile]);
 
   const handleSelectWeatherCard = (index: number) => {
-    setSelectedCard(index)
+    setSelectedCard(index);
     const weatherSegmentData: Array<IBarchartData> = data[index].data.map(
       (item) => ({
         time: dayjs(item.dt_txt).format("ha"),
@@ -46,26 +53,28 @@ export const WeatherCardContainer = ({ data }: IWeatherCardContainerProps) => {
     );
 
     setWeatherSegmentData(weatherSegmentData);
-
   };
 
   useEffect(() => {
-    if(data){
-      const weatherSegmentData: Array<IBarchartData> = data[selectedCard ? selectedCard : 0]?.data?.map(
-        (item) => ({
-          time: dayjs(item.dt_txt).format("ha"),
-          temp: item.main.temp,
-        })
-      );
-  
+    if (data && selectedCard) {
+      const weatherSegmentData: Array<IBarchartData> = data[
+        selectedCard
+      ]?.data?.map((item) => ({
+        time: dayjs(item.dt_txt).format("ha"),
+        temp: item.main.temp,
+      }));
+
       setWeatherSegmentData(weatherSegmentData);
     }
-  },[data])
+  }, [data]);
 
   const renderArrow = (props: RenderArrowProps) => {
     return props.type === "PREV" ? (
       <IconButton
-        onClick={props.onClick}
+        onClick={() => {
+          props.onClick();
+          isMobile && setWeatherSegmentData(undefined);
+        }}
         aria-label="arrow"
         icon={<Icon as={IoChevronBackSharp} />}
         disabled={props.isEdge}
@@ -75,7 +84,10 @@ export const WeatherCardContainer = ({ data }: IWeatherCardContainerProps) => {
       />
     ) : (
       <IconButton
-        onClick={props.onClick}
+        onClick={() => {
+          props.onClick();
+          isMobile && setWeatherSegmentData(undefined);
+        }}
         aria-label="arrow"
         icon={<Icon as={IoChevronForwardSharp} />}
         disabled={props.isEdge}
@@ -119,7 +131,7 @@ export const WeatherCardContainer = ({ data }: IWeatherCardContainerProps) => {
               }}
             >
               <CartesianGrid strokeDasharray="3 3" />
-              <XAxis dataKey="time" stroke="#fff"/>
+              <XAxis dataKey="time" stroke="#fff" />
               <YAxis stroke="#fff" />
               <Tooltip />
               <Legend />
