@@ -26,6 +26,7 @@ Since this is little application I used the `useState` hook for component's stat
 ## Network State 
 
 React Query is simply the best tool for handling of network state ( loading, error, fetching , etc) and fetching apis. Has a lot of convenient features out the box like
+- Data caching
 - Background fetch
 - Auto retry
 - Optimistic update
