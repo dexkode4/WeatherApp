@@ -1,6 +1,43 @@
 This project was bootstrapped with
 [Create React App](https://github.com/facebook/create-react-app).
 
+### Weather Application
+
+This is portable react js web application for weather forecastion and current weather condition based on a user location
+
+### Technologies Used
+
+- React Typescript
+- Chakra UI
+- React Query
+
+## UI styling
+Chakra UI is a simple, modular and accessible component library that gives you the building blocks you need to build your React applications.
+
+I choose Chakra UI because It’s simply the best tool for me , I’ve tried using material UI in the past but it wasn’t as easy and flexible as chakra UI. ChakraUI gives me full control over styling of components , and my productivity has also increased ever since I started using chakra.
+
+<a href="https://chakra-ui.com/">Learn more</a>
+
+## Component State management 
+
+Since this is little application I used the `useState` hook for component's state
+
+
+## Network State 
+
+React Query is simply the best tool for handling of network state ( loading, error, fetching , etc) and fetching apis. Has a lot of convenient features out the box like
+- Background fetch
+- Auto retry
+- Optimistic update
+- Pagination
+- Infinite query
+- Api Invalidation 
+
+<a href="https://react-query.tanstack.com/">Learn more</a>
+
+
+
+
 ## Available Scripts
 
 In the project directory, you can run:
