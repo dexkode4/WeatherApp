@@ -3,7 +3,7 @@ This project was bootstrapped with
 
 ### Weather Application
 
-This is portable react js web application for weather forecastion and current weather condition based on a user location
+This is portable react js web application for weather forecasting and current weather condition based on a user location
 
 ### Technologies Used
 
