@@ -18,17 +18,14 @@ I choose Chakra UI because It’s simply the best tool for me , I’ve tried usi
 
 <a href="https://chakra-ui.com/">Learn more</a>
 
-## Component State management 
+## State management 
+React Query
+React Query is simply the best tool for Fetching, caching and updating data in your React applications all without touching any "global state" and with just few lines of code. It also has a lot of unique features, just to mention a few that I frequently use we have:
 
-Since this is little application I used the `useState` hook for component's state
-
-
-## Network State 
-
-React Query is simply the best tool for handling of network state ( loading, error, fetching , etc) and fetching apis. Has a lot of convenient features out the box like
 - Data caching
 - Background fetch
 - Auto retry
+- Refetch
 - Optimistic update
 - Pagination
 - Infinite query
