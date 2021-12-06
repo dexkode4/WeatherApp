@@ -1,4 +1,3 @@
-import { useState } from "react";
 import { useQuery } from "react-query";
 import { getWeatherInfo } from "../api";
 import { ICoord } from "../types/interface";

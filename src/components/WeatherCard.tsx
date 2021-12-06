@@ -24,11 +24,11 @@ export const WeatherCard = ({
     const sum = data.data.reduce((acc, curr) => acc + curr.main.temp, 0);
 
     if(tempUnit === Temp.Fahrenheit){
-     return ((sum * 9)/5) + 32 
+     return Math.round(((sum * 9)/5) + 32)
 
     }
     else {
-      return ((sum - 32) * 5)/9 
+      return Math.round(((sum - 32) * 5)/9 )
 
     }
   };

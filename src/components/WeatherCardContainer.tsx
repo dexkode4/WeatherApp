@@ -52,18 +52,9 @@ export const WeatherCardContainer = ({ data }: IWeatherCardContainerProps) => {
       }));
       setWeatherSegmentData(weatherSegmentData);
     }
+    // eslint-disable-next-line
   }, [data]);
 
-  const [navigateCount, setNavigateCount] = useState(0);
-
-  const _getVisibleCardIndexes = () => {
-    let dummyArray = [0,1,2,3,4,5];
-
-    setNavigateCount((prev) => prev + 1)
-    const cardPerPage = 3;
-    const visibleCardIndexes = dummyArray.splice(navigateCount, cardPerPage);
-  }
-  
 
   const renderArrow = (props: RenderArrowProps) => {
     return props.type === "PREV" ? (
@@ -84,7 +75,6 @@ export const WeatherCardContainer = ({ data }: IWeatherCardContainerProps) => {
         onClick={() => {
           props.onClick();
           isMobile && setWeatherSegmentData(undefined);
-          _getVisibleCardIndexes()
         }}
         aria-label="arrow"
         icon={<Icon as={IoChevronForwardSharp} />}

@@ -1,8 +1,5 @@
 import React, { createContext, useState } from "react";
 import { Temp } from "../types/TempEnums";
-
-type TempUnit = "dark" | "light";
-
 interface IContextValues {
     tempUnit: Temp;
     toggleMode: (val : Temp) => void
