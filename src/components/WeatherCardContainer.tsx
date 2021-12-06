@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import { IconButton, Icon, Flex, useMediaQuery } from "@chakra-ui/react";
 import Carousel, { RenderArrowProps } from "react-elastic-carousel";
 import { IoChevronBackSharp, IoChevronForwardSharp } from "react-icons/io5";
@@ -6,6 +6,8 @@ import { IWeatherInfoSection } from "../types/interface";
 import { WeatherCard } from "./WeatherCard";
 import dayjs from "dayjs";
 import { Barchart } from "./Barchart";
+import { TempContext } from "../context/TempContext";
+import { Temp } from "../types/TempEnums";
 
 const breakPoints = [
   { width: 1, itemsToShow: 1 },
@@ -28,13 +30,14 @@ export const WeatherCardContainer = ({ data }: IWeatherCardContainerProps) => {
     useState<Array<IBarchartData>>();
   const [selectedCard, setSelectedCard] = useState<number>(0);
   const [isMobile] = useMediaQuery("(max-width: 665px)");
+  const {tempUnit} = useContext(TempContext);
 
   const handleSelectWeatherCard = (index: number) => {
     setSelectedCard(index);
     const weatherSegmentData: Array<IBarchartData> = data[index].data.map(
       (item) => ({
         time: dayjs(item.dt_txt).format("ha"),
-        temp: item.main.temp,
+        temp:  tempUnit === Temp.Fahrenheit ? Math.round((((item.main.temp * 9)/5) + 32)) : item.main.temp,
       })
     );
 
@@ -46,14 +49,15 @@ export const WeatherCardContainer = ({ data }: IWeatherCardContainerProps) => {
     if (data) {
       const weatherSegmentData: Array<IBarchartData> = data[
         selectedCard
-      ]?.data?.map((item) => ({
+      ]?.data?.map((item) => {       
+        return ({
         time: dayjs(item.dt_txt).format("ha"),
-        temp: item.main.temp,
-      }));
+        temp: tempUnit === Temp.Fahrenheit ? Math.round((((item.main.temp * 9)/5) + 32)) : item.main.temp,
+      })});
       setWeatherSegmentData(weatherSegmentData);
     }
     // eslint-disable-next-line
-  }, [data]);
+  }, [data, tempUnit]);
 
 
   const renderArrow = (props: RenderArrowProps) => {

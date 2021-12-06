@@ -24,10 +24,10 @@ export const WeatherCard = ({
   const calculateAverageTemp = (): number => {
     const sum = data.data.reduce((acc, curr) => acc + curr.main.temp, 0);
 
-    if(tempUnit === Temp.Fahrenheit){
-     return Math.round((((sum * 9)/5) + 32)/ data.data.length)
+    // if(tempUnit === Temp.Fahrenheit){
+    //  return Math.round((((sum * 9)/5) + 32)/ data.data.length)
 
-    }
+    // }
     return Math.round(sum / data.data.length)
   };
 
