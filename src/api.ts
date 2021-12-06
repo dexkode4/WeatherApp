@@ -1,5 +1,6 @@
 import axios from "axios";
 import { ICoord, IWeatherInfo } from "./types/interface";
+import { Temp } from "./types/TempEnums";
 
 const routes = {
   weatherInfo:
@@ -33,13 +34,13 @@ const getErrorMsg = (error: ErrorType): string => {
     return DEFAULT_ERROR_MESSAGE;
   };
 
-export const getWeatherInfo = async (coord: ICoord, unit:string): Promise<IWeatherInfo> => {
+export const getWeatherInfo = async (coord: ICoord): Promise<IWeatherInfo> => {
   
   try {
     const response = await axios.get(routes.weatherInfo, {
       params: {
         ...coord,
-        units: unit
+        units: Temp.Celsius
       },
     });
 

@@ -1,5 +1,6 @@
 import { Flex, Heading, Image, Text, Tag } from "@chakra-ui/react";
-import React from "react";
+import React, {useContext} from "react";
+import { TempContext } from "../context/TempContext";
 import { IWeatherInfoSection } from "../types/interface";
 import { Temp } from "../types/TempEnums";
 import { constructUrl } from "../utils";
@@ -17,14 +18,26 @@ export const WeatherCard = ({
   handleSelect,
   active,
 }: IWeatherCardProps) => {
+  const { tempUnit } = useContext(TempContext);
+  console.log(tempUnit)
   const calculateAverageTemp = (): number => {
     const sum = data.data.reduce((acc, curr) => acc + curr.main.temp, 0);
-    return Math.round(sum / data.data.length);
+
+    if(tempUnit === Temp.Fahrenheit){
+     return Math.round(((sum * 9)/5) + 32)
+
+    }
+    else {
+      return Math.round(((sum - 32) * 5)/9 )
+
+    }
   };
+
+
   return (
     <Flex
-      borderWidth="1px"
-      borderColor="gray.400"
+      borderWidth={active ? "3px":"1px"}
+      borderColor={active ? "black" : "gray.400"}
       height="30vh"
       w={["90%", "80%"]}
       borderRadius="md"
@@ -32,8 +45,6 @@ export const WeatherCard = ({
       my="5"
       shadow={active ? "lg" : "sm"}
       onClick={handleSelect}
-      // templateColumns="1fr"
-      // justifyItems="center"
       flexDirection="column"
       justifyContent="space-between"
       alignItems="center"
@@ -57,10 +68,6 @@ export const WeatherCard = ({
         textTransform="capitalize"
         color="white"
       >
-        {" "}
-        {/* <TagLabel>
-            {data.data[0].weather[0].description}
-          </TagLabel> */}
         {data.data[0].weather[0].description}
       </Tag>
       <Image
@@ -71,8 +78,7 @@ export const WeatherCard = ({
         <Text color="white">
           {calculateAverageTemp()}
           <sup>o</sup>
-          {localStorage.getItem("temperature_unit") &&
-          localStorage.getItem("temperature_unit") === Temp.Celsius
+          {tempUnit === Temp.Celsius
             ? "C"
             : "F"}
         </Text>

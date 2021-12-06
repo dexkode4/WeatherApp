@@ -22,10 +22,11 @@ interface IWeatherCardContainerProps {
   data: Array<IWeatherInfoSection>;
 }
 
+
 export const WeatherCardContainer = ({ data }: IWeatherCardContainerProps) => {
   const [weatherSegmentData, setWeatherSegmentData] =
     useState<Array<IBarchartData>>();
-  const [selectedCard, setSelectedCard] = useState<number>();
+  const [selectedCard, setSelectedCard] = useState<number>(0);
   const [isMobile] = useMediaQuery("(max-width: 665px)");
 
   const handleSelectWeatherCard = (index: number) => {
@@ -40,18 +41,20 @@ export const WeatherCardContainer = ({ data }: IWeatherCardContainerProps) => {
     setWeatherSegmentData(weatherSegmentData);
   };
 
+
   useEffect(() => {
-    if (data && selectedCard) {
+    if (data) {
       const weatherSegmentData: Array<IBarchartData> = data[
         selectedCard
       ]?.data?.map((item) => ({
         time: dayjs(item.dt_txt).format("ha"),
         temp: item.main.temp,
       }));
-
       setWeatherSegmentData(weatherSegmentData);
     }
+    // eslint-disable-next-line
   }, [data]);
+
 
   const renderArrow = (props: RenderArrowProps) => {
     return props.type === "PREV" ? (

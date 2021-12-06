@@ -6,27 +6,26 @@ import {
   Stack,
   Text,
 } from "@chakra-ui/react";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import { AppLoader } from "../components/AppLoader";
 import { Bottom } from "../components/Bottom";
 import { Top } from "../components/Top";
+import { TempContext } from "../context/TempContext";
 import { useWeatherInfo } from "../hooks/useWeatherInfo";
 import { ICoord } from "../types/interface";
 import { Temp } from "../types/TempEnums";
 
+
+
+
 export const WeatherInfo = () => {
   const toast = useToast();
   const [coord, setCoord] = useState<ICoord>();
-  const [tempUnit, setTempUnit] = useState<string>(Temp.Celsius);
-  const { data, isLoading, isFetching, isError, error, refetch } =
-    useWeatherInfo(coord, tempUnit);
 
-  useEffect(() => {
-    const temperature_unit = localStorage.getItem("temperature_unit");
-    if (temperature_unit) {
-      setTempUnit(temperature_unit);
-    }
-  }, []);
+  const { data, isLoading, isFetching, isError, error, refetch } =
+    useWeatherInfo(coord);
+
+
 
   useEffect(() => {
     if ("geolocation" in navigator) {
@@ -47,9 +46,6 @@ export const WeatherInfo = () => {
     }
   }, [toast]);
 
-  useEffect(() => {
-    localStorage.setItem("temperature_unit", tempUnit);
-  }, [tempUnit]);
 
   useEffect(() => {
     const errorObj = error as { message: string };
@@ -64,6 +60,12 @@ export const WeatherInfo = () => {
       });
     }
   }, [isError, error, toast]);
+
+  const { tempUnit, toggleMode } = useContext(TempContext)
+
+  const handleToggleUnit = (nextValue: string) => {
+    toggleMode(nextValue as Temp)
+  }
   return (
     <Flex direction="column" background="#2052D1" h="100vh" >
       <Flex direction="column" background="linear-gradient(120deg,rgba(255,255,255,0.3),transparent)" backdropFilter="blur(30px)" >
@@ -74,7 +76,7 @@ export const WeatherInfo = () => {
       ) : (
         <>
           {isFetching && <AppLoader />}
-          <RadioGroup onChange={setTempUnit} value={tempUnit} m="4" mb="0">
+          <RadioGroup onChange={handleToggleUnit} value={tempUnit} m="4" mb="0">
             <Stack
               direction="row"
               justifyContent={["space-between", "flex-start"]}
