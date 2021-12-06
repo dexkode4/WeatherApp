@@ -45,7 +45,7 @@ export const WeatherCardContainer = ({ data }: IWeatherCardContainerProps) => {
   };
 
 
-  useEffect(() => {
+  useEffect(() => {    
     if (data) {
       const weatherSegmentData: Array<IBarchartData> = data[
         selectedCard
