@@ -29,7 +29,6 @@ export const WeatherCard = ({
     return Math.round(sum / data.data.length)
   };
 
-
   return (
     <Flex
       borderWidth={active ? "3px":"1px"}
